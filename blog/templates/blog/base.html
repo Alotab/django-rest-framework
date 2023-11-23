@@ -1,0 +1,224 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to code with Devwithcode, Read articles to sharpen your software development skills. Python and Django can help you learn the basics of coding, web development both frontend and backen, or to advance your skills in a particular language">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Python, Docker, AWS, code, coding, learn to code, programming, programming languages, Bard, large language model, Google AI, GraphQL, ChatGPT, articles, pytest, unittest, github, gitaction, gitlab, copilot, algorithm, program, API, OOP, Machine learning scripts, tensorflow, models, training, terminal, stackoverflow, frontend, backend, fullstack, software developer, deployment, django, react, mysql, postgres, database, flask, git, REST/RESTful, SQL, json ">
+    <!-- <link rel="stylesheet" type="text/css" href="static/css/styles.css"> -->
+     <!-- <meta name="twitter:site" content="@nytimesbits" /> -->
+    <title>{{ object.title }}</title>
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@alazkaBoi" />
+    <meta name="twitter:site" content="@alazkaBoi" />
+    <!--<meta name="twitter:image" content="{{ post.image.url }}" />-->
+    <meta name="twitter:image:src" content="{{ post_image }}" />
+    <!--<meta name="twitter:image:src" content="{{ post.image.url }}">-->
+    <meta property="og:url" content="https://devwithcode.com{{ post.get_absolute_url }}" />
+    <meta property="og:title" content="{{ post.title }}" />
+    <meta property="og:description" content="{{ post.snippet}}" />
+    <meta property="og:image" content="{{ post.image.url }}" />
+    <!--<meta property="og:image:width" content="1280" />-->
+    <!--<meta property="og:image:height" content="640" />-->
+
+
+
+
+
+
+    <!-- <meta property="og:description" content="A Freelancer and a software developer who puts his thoughts through writing articles and sharing ideas on my website"> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">　
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">　
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <!--=============== SCROLLREVEAL ===============-->
+    {% comment %} <script src="{% static 'js/scrollreveal.min.js' %}"></script> {% endcomment %}
+
+    <!-- <script src="js/scrollreveal.min.js"></script> -->
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet"type="text/css" href="{% static 'css/content-styles.css' %}">
+
+
+    <!--=============== REMIXICON ===============-->
+   
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <link href="//db.onlinewebfonts.com/c/68e94a17c3e618dbe0936fcbf25b26c6?family=TNY+Adobe+Caslon+Pro" rel="stylesheet" type="text/css"/>
+    <link href="//db.onlinewebfonts.com/c/1e44faec07b8b81f60a3215d76bd0086?family=Irvin" rel="stylesheet" type="text/css"/>
+    <!-- <link rel="stylesheet" href="path/to/assets/content-styles.css" type="text/css"> -->
+
+
+   
+</head>
+<body>
+    <div class="wrapper">
+        <!--====================== NAVIGATION SECTION ==========================-->
+        <header>
+            <div class="scroll-tracker"></div>
+            <div class="nav-main">
+               
+                 <!-------------- logo and search icon ---------------->
+                <div class="logo">
+                    <div class="main-logo">
+                        <a href="{% url 'blog:home' %}"><img src="{% static 'images/logo2.svg' %}" alt="logo" ></a>
+                    </div>
+                    <div class="search">
+                        <!-- <input type="search" id="gsearch" name="gsearch"> -->
+                        <i class="ri-search-line search-icon"></i>
+                    </div>
+                </div>
+
+                <!--------------- DARK MOODE ------------------>
+
+                <!-- <div class="darkmode-set">
+                    <i class="ri-moon-fill dark-set"></i>
+                    <i class="ri-sun-fill sun-set activate-mode"></i>
+                </div> -->
+            
+                <!------------- Hambuger menu  ---------------->
+                <button class="mobile-nav-toggle" 
+                    aria-controls="primary-navigation" aria-expanded="false">
+                    <span class="sr-only">
+                        <i class="ri-menu-line"></i>
+                    </span> 
+                    <!--- add menu there to help screen readers know is not just an icon but a menu button-->
+                </button>
+
+                <button class="mobile-nav-toggle-close" aria-expanded="false">
+                    <span class="sr-only">
+                        <i class="ri-close-line"></i>
+                    </span> 
+                    <!--- add menu there to help screen readers know is not just an icon but a menu button-->
+                </button>
+
+
+                <!--------------------- Navigation links ------------------------->
+                <div class="nav-links-menu">
+                
+                    <div class="darkmode-nav">
+                        <button class="sunset-setup" aria-controls="primary-darkmode" aria-expanded="false">
+                            <span class="darkmode-icon">
+                                <i class="ri-sun-fill"></i>
+                            </span> 
+                        </button>
+        
+                        <button class="darkmode-setup" aria-expanded="false">
+                            <span class="darkmode-icon">
+                                <i class="ri-moon-fill"></i>
+                            </span> 
+                            <!--- add menu there to help screen readers know is not just an icon but a menu button-->
+                        </button>
+                    </div>
+            
+                    <div class="subheader" id="nav-menu">
+                        <nav>
+                            <ul id="primary-navigation" data-visible="false"  class="primary-navigation">
+                                {% if request.user.is_authenticated %}
+                                <li class="active"><a href="{% url 'blog:post' %}"class="home-link write-link"><i class="ri-edit-line"></i>Write</a></li>
+                                <li class="active"><a href="{% url 'blog:home' %}"class="home-link">Home</a></li>
+                                <li><a href="{% url 'portfolio' %}" class="portfolio-link">Portfolio</a></li>
+                                <li><a href="{% url 'logout' %}" class="sign-in-link" id="sign-in">LogOut</a></li>
+                                {% else %}
+                                <li class="active"><a href="{% url 'blog:home' %}" class="home-link">Home</a></li>
+                                <li><a href="{% url 'portfolio' %}" class="portfolio-link">Portfolio</a></li>
+                                <li><a href="{% url 'login' %}" class="sign-in-link">Sign-In</a></li>
+                                <!-- <li><a href="{% url 'signup' %}" class="create-account-link">Create account</a></li> -->
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+
+        <!--====================== MAIN CONTENT ====================-->
+       {% block content %}
+       {% endblock %}
+
+
+       <!--===================== CHATBOT ========================-->
+       <!-- <div class="chatbox-container">
+            <button class="chatbot-toggler">
+                <span class="material-symbols-outlined"><i class="ri-message-3-line"></i></span>
+                <span class="material-symbols-outlined"><i class="ri-close-line"></i></span>
+            </button>
+
+            <div class="chatbot">
+                <section>
+                    <h2>Chatbot</h2>
+                    <span class="close-btn material-symbols-outlined"><i class="ri-close-line"></i></span>
+                </section>
+                <ul class="chatbox">
+                    {% csrf_token %}
+                    <li class="chat incoming">
+                        <span class="material-symbols-outlined">
+                            <img src="{% static 'images/chatbot.png'%}" alt="">
+                        </span>
+                        <p>Hi there <br> How can I help you</p>
+                    </li>
+                    <li class="chat outgoing">
+                    </li>
+                    <div class="chat-input">
+                        <textarea name="question" placeholder="Enter your message" required></textarea>
+                        <span id="send-btn" class="material-symbols-outlined">
+                            <img src="{% static 'images/send-message.png'%}" alt="">
+                        </span>
+                    </div>
+                </ul>
+            </div>
+       </div> -->
+    </div>
+
+       
+ 
+
+    <!---=================== FOOTER SECTION ==========================-->
+    <footer>
+        <div class="website-slogan">
+            <p class="footer-website-name">DevWithCode</p>
+            <p>A community that refines your programming journey.</p>
+        </div>
+        <ul class="footer-nav">
+            <li class="footer-nav-link"><a href="#">Home</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="signarture">
+            @2023
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+
+    <!--=============== MAIN-JAVASCRIPT SECTION ===============-->
+    <script src="{% static 'js/script.js' %}" type="module"></script>
+
+    <!--=============== SCROLLREVEAL ===============-->
+    <script src="{% static 'js/scrollreveal.min.js' %}"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+
+   
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>hljs.initHighlightingOnLoad();</script>
+   
+</body>
+</html>
