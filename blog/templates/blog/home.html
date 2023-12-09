@@ -13,7 +13,7 @@
                 <h3 class="tag-headling">Popular Tags</h3>
                 <div class="sidebar-nav">
                     {% for tag in tags %}
-                    <div  id="default-sidebar" class="sidebar-nav-element">#{{ tag }}</div>
+                    <div class="sidebar-nav-element">#{{ tag }}</div>
                     {% endfor %}
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="community-post">
                 <h2 class="community-name">DevWithCode</h2>
                 <div class="community-post-headline">
-                    <img src="{% static 'images/custome_home.avif'%}">
+                    <img src="{% static 'images/custome_home.avif'%}" alt="web-homepage-image">
                     <h4> Welcome to 📚 DevWithCode 🚀!</h4>
                     <span>I'm so glad you're here. This is a place where I share my thoughts and ideas, showcase my work, and connect with other like-minded people.</span>
                 </div>
@@ -46,7 +46,7 @@
                 <p>Create Account</p>
             </div>
 
-            <!--------------------- content posts ----------------------->
+            <!--==================== content posts =============================-->
             <div class="middle-colume-post" id="middle-colume-post">
                 {% for post in posts %}
                 <div class="post ck-content">
@@ -70,8 +70,8 @@
                         </a>
                     </div>
                     <div class="post-tags">
-                        {% for post in post.tags.all %}
-                            <a class="post-tag-chrome" href="#"><span></span>{{ post }}</a>
+                        {% for tag in post.tags.all %} 
+                            <a class="post-tag-chrome" href="#"><span></span>{{ tag }}</a>
                         {% endfor %}
                     </div>
                 
@@ -95,7 +95,7 @@
                 <p>Load more stories</p>
             </div>
         </div>
-        <!---------------------  left-colume conten -------------------->
+        <!--=========================  left-colume conten =========================-->
         <div class="right-colume"></div>
     </div>
 

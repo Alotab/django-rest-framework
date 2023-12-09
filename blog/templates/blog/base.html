@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,62 +8,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn how to code with Devwithcode, Read articles to sharpen your software development skills. Python and Django can help you learn the basics of coding, web development both frontend and backen, or to advance your skills in a particular language">
     <meta name="keywords" content="HTML, CSS, JavaScript, Python, Docker, AWS, code, coding, learn to code, programming, programming languages, Bard, large language model, Google AI, GraphQL, ChatGPT, articles, pytest, unittest, github, gitaction, gitlab, copilot, algorithm, program, API, OOP, Machine learning scripts, tensorflow, models, training, terminal, stackoverflow, frontend, backend, fullstack, software developer, deployment, django, react, mysql, postgres, database, flask, git, REST/RESTful, SQL, json ">
-    <!-- <link rel="stylesheet" type="text/css" href="static/css/styles.css"> -->
-     <!-- <meta name="twitter:site" content="@nytimesbits" /> -->
-    <title>{{ object.title }}</title>
-    <meta property="og:type" content="article" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:creator" content="@alazkaBoi" />
-    <meta name="twitter:site" content="@alazkaBoi" />
-    <!--<meta name="twitter:image" content="{{ post.image.url }}" />-->
-    <meta name="twitter:image:src" content="{{ post_image }}" />
-    <!--<meta name="twitter:image:src" content="{{ post.image.url }}">-->
-    <meta property="og:url" content="https://devwithcode.com{{ post.get_absolute_url }}" />
-    <meta property="og:title" content="{{ post.title }}" />
-    <meta property="og:description" content="{{ post.snippet}}" />
-    <meta property="og:image" content="{{ post.image.url }}" />
-    <!--<meta property="og:image:width" content="1280" />-->
-    <!--<meta property="og:image:height" content="640" />-->
-
-
-
-
-
-
-    <!-- <meta property="og:description" content="A Freelancer and a software developer who puts his thoughts through writing articles and sharing ideas on my website"> -->
-
+    
+    <title>{{ post.title }}</title>
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@alazkaBoi" >
+    <meta name="twitter:site" content="@alazkaBoi" >
+    <meta name="twitter:image:src" content="{{ post_image }}" >
+    <meta property="og:url" content="https://devwithcode.com{{ post.get_absolute_url }}" >
+    <meta property="og:title" content="{{ post.title }}" >
+    <meta property="og:description" content="{{ post.snippet}}" >
+    <meta property="og:image" content="{{ post.image.url }}" >
+    <meta name="google-site-verification" content="U4838iJ62QmAN4_ldMdKIziiSQFpfNrVudoyeitW2PU" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">　
- 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/monokai.min.css">　
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <!--=============== SCROLLREVEAL ===============-->
-    {% comment %} <script src="{% static 'js/scrollreveal.min.js' %}"></script> {% endcomment %}
+    <!--<script src="{% static 'js/scrollreveal.min.js' %}"></script> -->
 
     <!-- <script src="js/scrollreveal.min.js"></script> -->
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet"type="text/css" href="{% static 'css/content-styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/content-styles.css' %}">
+ 
+
 
 
     <!--=============== REMIXICON ===============-->
    
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
-    <link href="//db.onlinewebfonts.com/c/68e94a17c3e618dbe0936fcbf25b26c6?family=TNY+Adobe+Caslon+Pro" rel="stylesheet" type="text/css"/>
-    <link href="//db.onlinewebfonts.com/c/1e44faec07b8b81f60a3215d76bd0086?family=Irvin" rel="stylesheet" type="text/css"/>
-    <!-- <link rel="stylesheet" href="path/to/assets/content-styles.css" type="text/css"> -->
-
-
-   
+    <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet" type="text/css">
+    <link href="//db.onlinewebfonts.com/c/68e94a17c3e618dbe0936fcbf25b26c6?family=TNY+Adobe+Caslon+Pro" rel="stylesheet" type="text/css">
+    <link href="//db.onlinewebfonts.com/c/1e44faec07b8b81f60a3215d76bd0086?family=Irvin" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="wrapper">
@@ -73,25 +56,25 @@
             <div class="scroll-tracker"></div>
             <div class="nav-main">
                
-                 <!-------------- logo and search icon ---------------->
+                 
                 <div class="logo">
                     <div class="main-logo">
                         <a href="{% url 'blog:home' %}"><img src="{% static 'images/logo2.svg' %}" alt="logo" ></a>
                     </div>
                     <div class="search">
                         <!-- <input type="search" id="gsearch" name="gsearch"> -->
-                        <i class="ri-search-line search-icon"></i>
+                        <!--<i class="ri-search-line search-icon"></i>-->
                     </div>
                 </div>
 
-                <!--------------- DARK MOODE ------------------>
+                <!-- DARK MOODE -->
 
                 <!-- <div class="darkmode-set">
                     <i class="ri-moon-fill dark-set"></i>
                     <i class="ri-sun-fill sun-set activate-mode"></i>
                 </div> -->
             
-                <!------------- Hambuger menu  ---------------->
+                <!-- Hambuger menu  -->
                 <button class="mobile-nav-toggle" 
                     aria-controls="primary-navigation" aria-expanded="false">
                     <span class="sr-only">
@@ -108,7 +91,7 @@
                 </button>
 
 
-                <!--------------------- Navigation links ------------------------->
+                <!-- Navigation links -->
                 <div class="nav-links-menu">
                 
                     <div class="darkmode-nav">
@@ -130,14 +113,17 @@
                         <nav>
                             <ul id="primary-navigation" data-visible="false"  class="primary-navigation">
                                 {% if request.user.is_authenticated %}
-                                <li class="active"><a href="{% url 'blog:post' %}"class="home-link write-link"><i class="ri-edit-line"></i>Write</a></li>
-                                <li class="active"><a href="{% url 'blog:home' %}"class="home-link">Home</a></li>
+                                <!-- <li class="active"><a href="{% url 'blog:post' %}"class="home-links write-links"><i class="ri-edit-line"></i>Write</a></li> -->
+                                <!-- <li class="active"><a href="{% url 'blog:home' %}"class="home-links">Home</a></li> -->
+                                <li><a href="{% url 'blog:home' %}" class="sign-in-link write-link" id="sign-in"><i class="ri-edit-line"></i>Write</a></li>
+
                                 <li><a href="{% url 'portfolio' %}" class="portfolio-link">Portfolio</a></li>
                                 <li><a href="{% url 'logout' %}" class="sign-in-link" id="sign-in">LogOut</a></li>
+                                
                                 {% else %}
-                                <li class="active"><a href="{% url 'blog:home' %}" class="home-link">Home</a></li>
+                                <!--<li class="active"><a href="{% url 'blog:home' %}" class="home-link">Home</a></li>-->
                                 <li><a href="{% url 'portfolio' %}" class="portfolio-link">Portfolio</a></li>
-                                <li><a href="{% url 'login' %}" class="sign-in-link">Sign-In</a></li>
+                                <!--<li><a href="{% url 'login' %}" class="sign-in-link">Sign-In</a></li>-->
                                 <!-- <li><a href="{% url 'signup' %}" class="create-account-link">Create account</a></li> -->
                                 {% endif %}
                             </ul>
@@ -196,12 +182,13 @@
             <p>A community that refines your programming journey.</p>
         </div>
         <ul class="footer-nav">
-            <li class="footer-nav-link"><a href="#">Home</a></li>
-            <li><a href="#">Portfolio</a></li>
+            <li class="footer-nav-link"><a href="{% url 'blog:home' %}">Home</a></li>
+            <li><a href="{% url 'portfolio' %}">Portfolio</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
-        <div class="signarture">
-            @2023
+         <div class="signarture">
+            <p>@2023</p>
+            <i class="ri-heart-fill"></i>
         </div>
     </footer>
 
