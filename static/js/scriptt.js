@@ -144,12 +144,12 @@ function addShareScrollBig(){
     // scrollPosition <= shareBoxOffset - 700
     if(externalOne){
         const shareBoxOffset = externalOne.offsetTop;
-        if(scrollPosition <= shareBoxOffset - 700 && shareScroll){
+        if(scrollPosition <= shareBoxOffset - 700){
             shareScroll.classList.add('active');
             shareScroll.classList.remove('share-scroll-position');
         }
         
-        if(scrollPosition >= shareBoxOffset - 700 && shareScroll || scrollPosition <= 130 && shareScroll){
+        if(scrollPosition >= shareBoxOffset - 700 || scrollPosition <= 130){
             shareScroll.classList.remove('active');
             shareScroll.classList.add('share-scroll-position');
         }
@@ -160,15 +160,15 @@ function addShareScrollBig(){
 
     /// Triggers when Mobile Bottom Toolbar is Invincible. Use if possible for mobile defualt: cry:>
     if(externalOne){
-        if(windowWidth <= ipadMaxWidth && scrollPosition >= externalOne.offsetTop && shareScroll){
+        if(windowWidth <= ipadMaxWidth && scrollPosition >= externalOne.offsetTop){
             shareScroll.classList.remove('share-scroll-position');
         }
-        if(windowWidth <= ipadMaxWidth && scrollPosition <= externalOne.offsetTop - 630 && shareScroll){
+        if(windowWidth <= ipadMaxWidth && scrollPosition <= externalOne.offsetTop - 630){
             shareScroll.classList.add('active');
             shareScroll.classList.remove('share-scroll-position');
         }
         
-        if(windowWidth <= ipadMaxWidth && scrollPosition >= externalOne.offsetTop - 630 && shareScroll || scrollPosition <= 130 && shareScroll){
+        if(windowWidth <= ipadMaxWidth && scrollPosition >= externalOne.offsetTop - 630 || scrollPosition <= 130){
             shareScroll.classList.remove('active');
             shareScroll.classList.add('share-scroll-position');
         }
@@ -188,10 +188,18 @@ const shareEl = document.querySelector('.share-share');
 const removeMouse = document.querySelectorAll('.social-share i');
 const socialContainerEl = document.querySelector('.social-scroll-wrapper');
 const hidePopupWidget = document.querySelector('.kat');
+const socialMediaContainer = document.querySelector(".social-media")
 
 
 let showMes = false;
 // var showWidget = true;
+
+// function toggleSociaContainer(){
+//     socialContainerEl.classList.toggle(("hide-socialmedia"));
+// }
+// toggleSociaContainer();
+
+
 
 function popShareScreen(){
     if(shareEl){
@@ -211,6 +219,8 @@ function popShareScreen(){
             document.addEventListener('mousedown', (e) => {
                 if (!socialContainerEl.contains(e.target) && !shareEl.contains(e.target)) {
                     socialContainerEl.classList.remove('show-social-links');
+                    // socialContainerEl.classList.add('hide-socialmedia');
+
                     document.body.style.overflow = 'auto';
 
                     removeMouse.forEach((icon) => {
