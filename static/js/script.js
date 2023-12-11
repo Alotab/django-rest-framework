@@ -466,3 +466,31 @@ if(localStorage.getItem("theme") == "light"){
     // execute when a user first the website for the first time
     localStorage.setItem("theme", "light");
 };
+
+
+
+// Add a copy clipboard to each code block 
+const preElements = document.querySelectorAll('.ck-content pre');
+
+preElements.forEach(preElement => {
+  const iconElement = document.createElement('i');
+  iconElement.classList.add('ri-file-copy-line');
+
+  const wrapperElement = document.createElement('div');
+  wrapperElement.classList.add('copy-icon-wrapper');
+
+  wrapperElement.appendChild(iconElement);
+  preElement.appendChild(wrapperElement);
+
+  // Add click event listener to each wrapper element
+  // Copy content of the `preElement` to the user's clipboard
+  wrapperElement.addEventListener('click', () => {
+    navigator.clipboard.writeText(preElement.textContent);
+    // Add a visual confirmation like a tooltip
+    wrapperElement.classList.add('clipboard-effect');
+    
+    setTimeout(() => {
+        wrapperElement.classList.remove('clipboard-effect');
+    }, 200);
+  });
+});

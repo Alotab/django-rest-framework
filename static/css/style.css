@@ -33,6 +33,7 @@
     --user-name: rgba(255, 255, 255, 0.5);
     --hm-username: rgb(51 65 85/var(--tw-text-opacity));
     --dim-textColors: rgb(41, 41, 41);
+    --heart-color: black;
     --zero: 0
     --share-social: rgb(30 41 59 / var(--zero));
     --ext-social-icon:rgb(51 65 85 / var(--tw-text-opacity));
@@ -57,7 +58,7 @@
   
 }
   
-  .dark-mode-theme{
+.dark-mode-theme{
     --tw-bg-opacity: 1;
     --website-backgroundColor: #081b29;
     --ft-background: #000000;
@@ -74,6 +75,7 @@
     --ext-social-hover: #11222e;  
     --btn-border: #fff;
     --hambuger-nav:hsla(0, 0%, 0%, 0.5);
+    --heart-color: rgb(248, 8, 8);
   }
   
   button{
@@ -765,6 +767,9 @@
     font-size: 12px;
     margin-top: 1.5rem;
     /* color: #f1f1f1; */
+  }
+  .footer-heart-icon{
+    color: var(--heart-color);
   }
   
   /*========================= Create Post ====================*/
@@ -3635,6 +3640,9 @@
       margin: 0rem 1.5rem;
         
     }
+    .main-post-headline h2{
+        font-size: 20px;
+    }
     .detail-post .post-image{
       height: 30rem;
       width: 100%
@@ -3809,3 +3817,29 @@
     }
   
 } 
+
+
+.copy-icon-wrapper{
+    color: rgb(162, 159, 159);
+    font-size: 20px;
+    position: absolute;
+    padding: 4px 5px;
+    top: 12px;
+    right: 15px;
+    cursor: pointer;
+}
+
+/* .copy-icon-wrapper:hover{
+    overflow: hidden;
+    padding: 8px;
+    border-radius: 50%;
+    background: rgb(34, 34, 34);
+    
+    cursor: pointer;
+} */
+.clipboard-effect{
+    overflow: hidden;
+    padding: 4px 5px;
+    border-radius: 10%;
+    background: rgb(115, 113, 113);
+}

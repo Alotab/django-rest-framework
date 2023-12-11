@@ -460,8 +460,11 @@
   }
   
   .ck-content pre {
+    display: flex;
+    position: relative;
       padding: 3em;
       color: black;
+     
       background: black;
       border: 1px solid hsl(0, 3%, 12%);
       border-radius: 0.4rem;  
@@ -470,8 +473,7 @@
       tab-size: 4;
       /*white-space: pre-wrap;*/
       font-size: 13px;   
-      min-width: 200px;
-      
+      min-width: 200px; 
   }
   
   .ck-content pre code {
@@ -495,8 +497,13 @@
   @media (min-width: 320px) and (max-width: 480px) {
       /* @ckeditor/ckeditor5-code-block/theme/codeblock.css */
       .ck-content pre code {
-          white-space:nowrap;
-          overflow-x: auto;
+          /* white-space:nowrap;
+          overflow-x: auto; */
+
+
+          white-space: pre;
+          word-wrap: break-word;
+          overflow: auto;
       }
   }
   
