@@ -127,11 +127,11 @@ function addShareScrollBig(){
         //     // shareScroll.style.backgroundColor = "red";
         //     shareScroll.classList.remove('share-scroll-position');
         // }
-        if(windowWidth <= mobileMaxWidth && scrollPosition <= foot.offsetTop - 650){
+        if(windowWidth <= mobileMaxWidth && scrollPosition <= foot.offsetTop - 650 && shareScroll){
             shareScroll.classList.add('active');
             shareScroll.classList.remove('share-scroll-position');
         }
-        if(windowWidth <= mobileMaxWidth && scrollPosition >= foot.offsetTop - 650 || scrollPosition <= 130){
+        if(windowWidth <= mobileMaxWidth && scrollPosition >= foot.offsetTop - 650 && shareScroll || scrollPosition <= 130 && shareScroll){
             shareScroll.classList.remove('active');
             shareScroll.classList.add('share-scroll-position');
         } 
@@ -188,15 +188,24 @@ const shareEl = document.querySelector('.share-share');
 const removeMouse = document.querySelectorAll('.social-share i');
 const socialContainerEl = document.querySelector('.social-scroll-wrapper');
 const hidePopupWidget = document.querySelector('.kat');
+const socialMediaContainer = document.querySelector(".social-media")
 
 
 let showMes = false;
 // var showWidget = true;
 
+function toggleSociaContainer(){
+    socialContainerEl.classList.toggle(("hide-socialmedia"));
+}
+// toggleSociaContainer();
+
+
+
 function popShareScreen(){
     if(shareEl){
         shareEl.addEventListener('click', () => {
-            socialContainerEl.classList.add('show-social-links');
+            // socialContainerEl.classList.add('show-social-links');
+            socialContainerEl.classList.toggle("show-social-links")
             likePop.classList.remove('alert-active');
             removeMouse.forEach((icon) => {
                 icon.style.cursor = 'default';
@@ -210,6 +219,8 @@ function popShareScreen(){
             document.addEventListener('mousedown', (e) => {
                 if (!socialContainerEl.contains(e.target) && !shareEl.contains(e.target)) {
                     socialContainerEl.classList.remove('show-social-links');
+                    // socialContainerEl.classList.add('hide-socialmedia');
+
                     document.body.style.overflow = 'auto';
 
                     removeMouse.forEach((icon) => {

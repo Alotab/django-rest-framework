@@ -1,21 +1,22 @@
 @font-face{
     font-family: PostHeading;
     src: url(hellvet.ttf);
-  }
+}
   
-  @font-face{
+@font-face{
     font-family: SourcePro;
     /* src: url('{% static "source-sans-pro.light.tff" %}'); */
     src: url("/static/fonts/source-sans-pro.light.ttf") format("truetype")
-  
-  }
-  @font-face {
+}
+@font-face {
     font-family: SourceProRegular;
     src: url("/static/fonts/source-sans-pro.regular.ttf") format("truetype");
-  }
+}
   
   
-  :root{
+
+  
+:root{
     --navBar-color: #7c9ce5 ;
     --button-hoverWhite: rgb(255 255 255 / 0.2);
     --button-hoverDark: #ffffff;
@@ -32,22 +33,29 @@
     --user-name: rgba(255, 255, 255, 0.5);
     --hm-username: rgb(51 65 85/var(--tw-text-opacity));
     --dim-textColors: rgb(41, 41, 41);
-    --share-social: rgb(30 41 59 / var(0));
+    --zero: 0
+    --share-social: rgb(30 41 59 / var(--zero));
     --ext-social-icon:rgb(51 65 85 / var(--tw-text-opacity));
     --ext-social-border: rgb(226 232 240 / var(--tw-border-opacity));
     --ext-social-hover:#f0f2f5;
     --btn-border: rgb(226 232 240 / var(--tw-border-opacity));
     --gn-textColor: #000;
+    --tw-text-opacity: 1;
   
   
     /* update */
-    --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color),0 8px 10px -6px var(--tw-shadow-color);
+    /*--tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),0 8px 10px -6px rgb(0 0 0 / 0.1);*/
+    /*--tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-colored),0 8px 10px -6px var(--tw-shadow-colored);*/
     --tw-shadow: 0 0 #0000;
-    --tw-shadow-colored: 0 0 #0000;
+    --tw-shadow-color: 0 0 #0000;
     --tw-ring-offset-shadow: 0 0 #0000;
     --tw-ring-shadow: 0 0 #0000;
-  }
+    
+    --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),0 8px 10px -6px rgb(0 0 0 / 0.1);
+    /*--tw-shadow-colored: 0 20px 25px -5px var(0 0 #0000),0 8px 10px -6px var(--tw-shadow-color);*/
+    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color),0 8px 10px -6px var(--tw-shadow-color);
+  
+}
   
   .dark-mode-theme{
     --tw-bg-opacity: 1;
@@ -881,7 +889,20 @@
     border: 1px solid gray;
   }
   .post-edit a:hover{
-    background: rgb(129, 129, 236);
+    background: rgb(189, 242, 175);
+  }
+  .post-delete a{
+    color: var(--dim-textColor);
+    font-size: 14px;
+    background: transparent;
+    text-align: left;
+    padding: 1.1rem;
+    border-radius: 0.3rem;
+    border: 1px solid gray;
+  }
+  .post-delete a:hover{
+    border: 1px solid red;
+    /* background: rgb(129, 129, 236); */
   }
   .detail-column{
     width: 100%;
@@ -955,7 +976,7 @@
     line-break: auto;
     /*line-height: 1.7em;*/
     line-height: 1.5em;
-    overflow: normal;
+    overflow: auto;
     color: var(--dim-textColors);
   }
   .post-main-detail h1{
@@ -1410,7 +1431,7 @@
     justify-content: center;
   }
   .button--flex:hover i{
-    transform: translate((.25rem));
+    transform: translate(.25rem)
     
   }
   .login-link p{
@@ -1942,16 +1963,18 @@
     object-fit: cover;
     right: -1px;
   }
-  .portfolio-container{
-    display: flex;
+.portfolio-container{
+    /* display: flex; */
     flex-wrap: wrap;
     justify-content: space-between;
     padding-top: 5rem;
     align-items: center;
     margin-left: 10rem;
     margin-right: 10rem;
-  }
-  .portfolio-card{
+    display: none;
+
+}
+.portfolio-card{
     width: 35rem;
     border-radius: 0.5rem;
     margin-bottom: 5rem;
@@ -1961,8 +1984,8 @@
     backdrop-filter: blur(6px);
     /* cursor: pointer; */
     transition: ease-out;
-  }
-  .portfolio-card:hove{
+}
+  .portfolio-card:hover{
     border: 1px solid black;
   }
   .portfolio-card img{
@@ -2162,8 +2185,8 @@
     width: 340px;
     overflow: hidden;
     border-radius: 15px;
-    box-shadow: 0 0 128px 0 rgba(0,0,0,0.5),
-                0 32px 64px -48 rgba(0,0,0,0.05);
+    box-shadow: 0 0 128px 0 rgba(0,0,0,0.5), 0 32px 64px -48px rgba(0,0,0,0.05);
+  
   
     transform-origin: bottom right;
     transition: all 0.1s ease;
@@ -2291,14 +2314,15 @@
   
   
   /*-------------------- extenal-share ----------------------*/
-.external-share-container{
+  .external-share-container{
     display: flex;
     flex-direction: column;
     position: relative;
     align-items: center;
     justify-content: center;
-}
-.share-link{
+  }
+  .share-link{
+    background: var(--share-background);
     width: 300px;
     height: 45px;
     -moz-box-align: center;
@@ -2309,40 +2333,32 @@
     border-radius: 30px;
     border: 0.5px solid rgb(194, 191, 191);
     transition: all 0.2s ease;
-
-}
-/* .share-link.share-java{
-    display: flex;
-    transform: translateY(0);
-} */
-
-  /* .share-link.share-scroll{} */
-.share-scroll{
+  }
+  
+  .share-scroll{
     background: var(--share-background);
     width: 300px;
     height: 45px;
     display: flex;
-    /* position: fixed; */
+    /*position: fixed;*/
     align-items: center;
     text-align: center;
     bottom: 3%;
   
     border-radius: 30px;
     border: 1px solid rgb(194, 191, 191);
-    --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 20px 25px -5px var(0 0 #0000),0 8px 10px -6px var(--tw-shadow-color);
+    
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);
     transition: all 0.2s ease;
-} 
-
-.share-scroll-position{
-    position: relative;
-}
-
-.active{
-    position: fixed;
-}
-.social-share{
+  }
+  .share-scroll-position{
+      position: relative;
+  }
+  
+  .active{
+      position: fixed;
+  }
+  .social-share{
     border-right: 1px solid rgba(199, 195, 195, 0.4);
     border-left-width: 1px;
     line-height: inherit;
@@ -2351,12 +2367,10 @@
     text-align: center;
     flex-basis: 25%;
     position: relative;
-    /* background: red; */
-    
-}
-.social-share:nth-child(4){
+  }
+  .social-share:nth-child(4){
     border-right: none;
-}
+  }
   .social-share i{
     font-size: 2.2rem;
     color: var(--share-social);
@@ -2424,11 +2438,11 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 600;
-    --tw-text-opacity: 1;
     color: rgb(51 65 85 / var(--tw-text-opacity));
-    --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 20px 25px -5px var(0 0 #0000),0 8px 10px -6px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow);
+    display: none;
+  }
+  .hide-socialmedia{
     display: none;
   }
   .show-social-links{
@@ -2441,7 +2455,6 @@
     /* padding: 0.75rem 0.5rem; */
     padding: 1.5rem 0.5rem;
    
-    --tw-text-opacity: 1;
     color: rgb(71 85 105 / var(--tw-text-opacity));
     border-radius: 0.25rem;
     /* font-size: 0.875rem; */
@@ -2525,8 +2538,8 @@
   
   
   
-  /*==================== Desktop ==================================*/
-  @media (min-width: 1025px) and (max-width: 1280px) {
+/*==================== Desktop ==================================*/
+@media (min-width: 1025px) and (max-width: 1280px) {
     /* Styles for desktops */
     /* body{
       background-color: brown;
@@ -2717,10 +2730,10 @@
       width: 30%;
       /* display: block !important; */
     }
-  }
+}
   
-  /* ================ Small screens, laptops ========================*/
-  @media (min-width: 769px) and (max-width: 1024px) {
+/* ================ Small screens, laptops ========================*/
+ @media (min-width: 769px) and (max-width: 1024px) {
     /* body {
       background-color: rgb(30, 34, 24);
     } */
@@ -2977,10 +2990,10 @@
       right: -230px;
     }
   
-  }
+}
   
-  /*========================== Mini Ipads / some large mobile devices =========================*/
-  @media (min-width: 481px) and  (max-width: 768px) {
+/*========================== Mini Ipads / some large mobile devices =========================*/
+@media (min-width: 481px) and  (max-width: 768px) {
     
     /* body {
       background-color: green;
@@ -3341,10 +3354,10 @@
     .share-link.share-scroll{
       height: 40px;
     }
-  }
+}
   
-  /*================ mobile devices ==============*/
-  @media (min-width: 320px) and (max-width: 480px) {
+/*================ mobile devices ==============*/
+@media (min-width: 320px) and (max-width: 480px) {
     /* body{
       background-color: violet;
     } */
@@ -3795,4 +3808,4 @@
       height: 40px;
     }
   
-  } 
+} 
