@@ -191,9 +191,9 @@ CKEDITOR_5_CONFIGS = {
             '|',
             'blockQuote',
         ],
-        'toolbar': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
+        'toolbar': ['heading', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
         'highlight', '|','codeBlock',
-                     '|', 'blockQuote', 'imageUpload', '|','fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat','bulletedList'],
+                     '|', 'blockQuote', 'imageUpload', '|','fontSize', 'fontFamily', 'fontColor', 'mediaEmbed', 'removeFormat','bulletedList'],
         'image': {
             'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
                         'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
