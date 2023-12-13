@@ -47,9 +47,9 @@
             </div>
 
             <!--==================== content posts =============================-->
-            <div class="middle-colume-post" id="middle-colume-post">
+            <div class="middle-colume-post infinite-container" id="middle-colume-post">
                 {% for post in posts %}
-                <div class="post ck-content">
+                <div class="post infinite-item ck-content">
                     <div class="author-profile">
                         <div class="author-image">
                             <a href="{% url 'portfolio' %}"><img src="{{ post.author.profile_image.url }}" alt="author"></a>
@@ -75,6 +75,8 @@
                         {% endfor %}
                     </div>
                 
+
+
                     <!-- <div class="comment-share">
                         <div class="post-comment">
                             <a href="#">
@@ -90,10 +92,19 @@
                 </div>
                 {% endfor %}
             </div>
-
-            <div class="load-post">
-                <p>Load more stories</p>
+            {% if page_obj.has_next %}
+            <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+            {% endif %}
+            
+            <div class="d-flex justify-content-center" style="display:none;">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
             </div>
+
+            <!-- <div class="load-post">
+                <p>Load more stories</p>
+            </div> -->
         </div>
         <!--=========================  left-colume conten =========================-->
         <div class="right-colume"></div>

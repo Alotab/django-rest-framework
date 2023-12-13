@@ -13,6 +13,14 @@ from taggit.models import Tag
 from .forms import PostForm
 from .utilss import get_real_time_date_format
 import readtime 
+from django.views.generic.list import ListView
+
+class PostsView(ListView):
+  model = Post
+  paginate_by = 3
+  context_object_name = 'posts'
+  template_name = 'blog/home.html'
+  ordering = ['publish']
   
 
 
@@ -36,21 +44,21 @@ def post_blog(request):
 
 
 
-def post_list(request):
-  """ List the all the post in the home page """
-  posts = Post.published.all().order_by('-publish')
-  # post_list = list(posts)
-  trending_post = Post.published.all().order_by('-publish')[:6]
-  latest_post = Post.published.all().order_by('-publish')[:3]
-  tags = Tag.objects.all()
+# def post_list(request):
+#   """ List the all the post in the home page """
+#   posts = Post.published.all().order_by('-publish')
+#   # post_list = list(posts)
+#   trending_post = Post.published.all().order_by('-publish')[:6]
+#   latest_post = Post.published.all().order_by('-publish')[:3]
+#   tags = Tag.objects.all()
 
-  context = {
-    'posts': posts,
-    'trending_post': trending_post,
-    'tags': tags,
+#   context = {
+#     'posts': posts,
+#     'trending_post': trending_post,
+#     'tags': tags,
  
-  }
-  return render(request, 'blog/home.html', context)
+#   }
+#   return render(request, 'blog/home.html', context)
 
 
 

@@ -1,5 +1,8 @@
 {% extends "blog/base.html" %}
 {% load static %}
+{% block title %}
+    {{ post.title }}
+{% endblock %}
 {%  block content %}
 
     <div class="main-detail-post">
