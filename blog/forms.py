@@ -1,6 +1,6 @@
 from django import forms
 from taggit.managers import TaggableManager
-from .models import Post
+from .models import Posts
 # from .models import Comment
 
 
@@ -14,6 +14,6 @@ from .models import Post
 class PostForm(forms.ModelForm):
 
     class Meta:
-        model = Post
+        model = Posts
         fields = ('title','snippet','content','image', 'status','tags', )
         prepopulated_fields = {'slug': ('title',)}

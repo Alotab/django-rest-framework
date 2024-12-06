@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model  # get the custome user model
 from .forms import CustomeUserChangeForm, CustomUserCreationsForm, AccountAuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 import warnings
-
+from django.http import JsonResponse
 from django.conf import settings
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME, get_user_model, login as auth_login,
@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import (
     AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm,
 )
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponseRedirect
@@ -30,6 +31,36 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 # from allauth.account.views import SignupView, LoginView
+from rest_framework import status, generics
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import UserSerializer
+
+
+## REACT VIEWS
+
+class UserCreateView(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # if serializer.is_valid():
+        #     user = serializer.save()
+        #     return Response({"status": "User created", "user": user.username}, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+@csrf_exempt
+def get_csrf_token(request):
+    return JsonResponse({'csrftoken': request.COOKIES.get('csrftoken')})
+
+
+
+
+
+
 
 
 

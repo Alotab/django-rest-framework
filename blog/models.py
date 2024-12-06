@@ -13,12 +13,30 @@ import uuid
 import readtime
 from django_ckeditor_5.fields import CKEditor5Field
 
+class Posts(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    snippet = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    status = models.CharField(max_length=20, choices=[('Draft', 'Draft'), ('Published', 'Published')])
+    tags = models.CharField(max_length=200, null=True, blank=True)
+    slug =  models.SlugField(max_length=250, unique_for_date='publish', unique=True, blank=True)
+    publish = models.DateTimeField(default=timezone.now)
+    author = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='post')
 
-# from meta.models import ModelMeta
+    def __str__(self):
+        return self.title
+    
 
+    def create_slug(sender, instance, **kwargs):
+        if not instance.slug:
+            instance.slug = slugify(instance.title)
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Posts, self).save(*args, **kwargs)
 
-
-# Create your models here.
 
 # This manager filter the post objects to retreived on published post
 class PublishedManager(models.Manager):
@@ -37,7 +55,7 @@ class Post(models.Model):
     slug =  models.SlugField(max_length=250, unique_for_date='publish', unique=True, blank=True)
     content = CKEditor5Field('Content', config_name='extends', blank=True)
     snippet = models.CharField(max_length=255)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='post')
+    # author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='post')
     publish = models.DateTimeField(default=timezone.now)
     image = models.ImageField(default='default.jpg',upload_to='post_pics', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -46,8 +64,8 @@ class Post(models.Model):
     published = PublishedManager()
     tags = TaggableManager()
 
-    def get_author_id(self):
-        return self.author.id
+    # def get_author_id(self):
+    #     return self.author.id
     
     @property
     def readtime(self):
@@ -80,20 +98,20 @@ class Post(models.Model):
 
 class Comment(models.Model):
     blog = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
-    user_comment = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user')
+    # user_comment = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user')
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self) -> str:
-        return f'{self.user_comment} {self.blog}'
+    # def __str__(self) -> str:
+    #     return f'{self.user_comment} {self.blog}'
 
 
 
 class CommentLike(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment_likes')
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment_likes')
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='likes')
     created_at = models.DateTimeField(auto_now_add=True)
 
     # ensure that no two CommentLike objects have the same user and comment values.
-    class Meta:
-        unique_together = (('user', 'comment'),)
+    # class Meta:
+    #     unique_together = (('user', 'comment'),)

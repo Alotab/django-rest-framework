@@ -7,7 +7,7 @@
     <div class="new-post">
         <h3>Create a New Post</h3>
     </div>
-   <form action="" method="post" enctype="multipart/form-data" class="form-scroll">
+   <form style="margin-top: 220px;" action="" method="post" enctype="multipart/form-data" class="form-scroll">
         {% csrf_token %}
         {{ form.media }}
         {{ form.as_p }}

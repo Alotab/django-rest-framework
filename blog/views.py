@@ -1,19 +1,45 @@
-from typing import Optional
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 # from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import UpdateView
-from .models import Post, Comment
+# from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+# from django.views.generic import UpdateView
+from .models import Post, Comment, Posts
+from django.views.decorators.csrf import csrf_exempt
 # from users.models import CustomUser
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from taggit.models import Tag
 from .forms import PostForm
 from .utilss import get_real_time_date_format
 import readtime 
 from django.views.generic.list import ListView
+from .serializers import PostsSerializer
+
+
+
+
+@api_view(['POST'])
+def create_posts(request):
+    if request.method == 'POST':
+        serializer = PostsSerializer(data=request.data)
+        if serializer.is_valid():
+            # You can save the data to the database if necessary
+            # For example, saving it to a model
+            posts = Posts.objects.create(
+                title=serializer.validated_data['title'],
+                snippet=serializer.validated_data['snippet'],
+                tags=serializer.validated_data['tags'],
+                content=serializer.validated_data['content'],
+                image=serializer.validated_data.get('image'),
+                status=serializer.validated_data['status'],
+            )
+            return Response({'status': 'Post created successfully', 'posts': serializer.data})
+        return Response(serializer.errors, status=400)
+
 
 class PostsView(ListView):
   model = Post
@@ -26,20 +52,59 @@ class PostsView(ListView):
 
 
 
+
+## UPDATE THE VIEW TO RECIEVE DATA FROM REACT 
+@csrf_exempt  # If you are not using CSRF tokens, you may need this decorator
 def post_blog(request):
-  if request.method == 'POST':
-    form = PostForm(request.POST, request.FILES)
-    if form.is_valid():
-      post = form.save(commit=False)
-      post.author = request.user
-      # context['meta'] = post.as_meta()
-      post.save()
-      messages.success(request, 'Post created successfully')
-      return redirect('blog:home')
+    if request.method == 'POST':
+        # Create a PostForm instance using request.FILES (for handling image uploads)
+        form = PostForm(request.POST, request.FILES)
+        
+        # Check if form data is valid
+        if form.is_valid():
+            post = form.save(commit=False)
+            # post.author = request.user  # Set the author to the current logged-in user
+            post.save()
+            
+            # Send success response back to the frontend
+            response_data = {
+                'status': 'success',
+                'message': 'Post created successfully!',
+                'post': {
+                    'title': post.title,
+                    'content': post.content,
+                    'image': post.image.url if post.image else None,  # Return the image URL
+                }
+            }
+            return JsonResponse(response_data, status=201)  # 201 for resource created
+        
+        else:
+            # If form validation fails, send error message back
+            response_data = {'status': 'error', 'message': form.errors}
+            return JsonResponse(response_data, status=400)
+    
+    else:
+        # If the request method is not POST, return the empty form
+        form = PostForm()
+    return render(request, 'blog/createPost.html', {'form': form})
+
+
+
+### Works fine just want to update a new one to recieve data from React
+# def post_blog(request):
+#   if request.method == 'POST':
+#     form = PostForm(request.POST, request.FILES)
+#     if form.is_valid():
+#       post = form.save(commit=False)
+#       post.author = request.user
+#       # context['meta'] = post.as_meta()
+#       post.save()
+#       messages.success(request, 'Post created successfully')
+#       return redirect('blog:home')
       
-  else:
-    form = PostForm()
-  return render(request, 'blog/createPost.html', {'form': form})
+#   else:
+#     form = PostForm()
+#   return render(request, 'blog/createPost.html', {'form': form})
 
 
 

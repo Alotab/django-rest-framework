@@ -6,7 +6,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from django.contrib.sitemaps.views import sitemap
-from users import views as user_views
+from profile import views as user_views
 # from haystack.views import SearchView
 from core.sitemaps import (
     HomeSitemap,
@@ -40,7 +40,8 @@ urlpatterns = [
     path('login/', user_views.login_view, name='login'),
     path('logout/', user_views.logout_view, name= 'logout'),
     path('portfolio/', user_views.portfolio, name= 'portfolio'),
-
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
     path('', include('blog.urls', namespace='blog')),
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
     path('robots.txt', TemplateView.as_view(template_name="blog/robots.txt", content_type="text/plain")),

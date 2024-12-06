@@ -226,23 +226,13 @@
   .write-link i{
     margin: 0px 3px;
   }
-  /* .write-link p{
-    font-size: 15px;
-  } */
-  /*.write-link{*/
-  /*  margin: 0 8px;*/
-  /*  display: flex;*/
-  /*  background: rgb(70, 70, 235);*/
-  /*  padding: 3px 10px;*/
-  /*  border-radius: 0.3rem;*/
-  /*}*/
+
   .write-link i{
      font-size: 15px;
      margin-right: 5px;
   }
-  /*.write-link:hover{*/
-  /*  background: rgb(131, 131, 243);*/
-  /*}*/
+ 
+
   .subheader .create-account-link{
     font-size: 15px;
     text-decoration: none;

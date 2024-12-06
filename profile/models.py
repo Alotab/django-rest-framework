@@ -1,9 +1,30 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, AbstractUser
 from django.contrib.auth.models import Group, Permission
 # from django.contrib.auth.models import UserManager
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
+
+
+# REACT NEW USER 
+
+class User(AbstractUser):
+    username = models.CharField(max_length=150, unique=True)
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
+    email = models.EmailField(unique=True, blank=True)
+    
+
+
+
+
+
+
+
+
+
+
+
 
 # function to create profile image path in the project
 def get_profile_image_filepath(self, filename):

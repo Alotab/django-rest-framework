@@ -4,7 +4,7 @@ django-snakeoil==1.1.2
 django-taggit==4.0.0
 lxml==4.9.3
 markdown2==2.4.10
-mysqlclient==2.2.0
+# mysqlclient==2.2.0
 # pillow==8.4.0
 pymysql==1.1.0
 readtime==3.0.0

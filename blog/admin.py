@@ -1,11 +1,16 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, Posts as CreatePost
 
-# Register your models here.
+@admin.register(CreatePost)
+class PostsAdmin(admin.ModelAdmin):
+    list_display = ['title', 'status']
+    search_fields = ['title']
+    prepopulated_fields = {'slug': ('title', )}
+
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'author', 'status']
+    list_display = ['title', 'status']
     search_fields = ['title']
     prepopulated_fields = {'slug': ('title', )}
 
@@ -14,4 +19,5 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['user_comment', 'comment', 'blog']
+    # list_display = ['user_comment', 'comment', 'blog']
+    list_display = ['comment', 'blog']
