@@ -244,34 +244,56 @@ CKEDITOR_5_CONFIGS = {
     }
 }
 
-
+# CORS configuration for allowing credentials
+CORS_ALLOW_CREDENTIALS = True  # This allows cookies and HTTP authentication to be sent.
 CORS_ALLOW_ALL_ORIGINS = True
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",  # Allow React app running on localhost:5173
-#     "http://127.0.0.1:5173",  # Allow React app running on 127.0.0.1:5173
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5173",  # Allow React app running on 127.0.0.1:5173
+    "http://127.0.0.1:8000",
+]
 
+CORS_ALLOWED_HEADERS = [
+    'Authorization',
+    'Content-Type',
+    # Other headers if needed
+]
 
-
+CORS_ORIGIN_WHITELIST = [
+    "http://127.0.0.1:5173",  # Replace with your frontend's URL
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ],
 }
 
 SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('JWT',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'AUTH_HEADER_TYPES': ('JWT','Bearer',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1500),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
-    # 'ROTATE_REFRESH_TOKENS': True,
+    # 'ROTATE_REFRESH_TOKENS': False,
     # 'BLACKLIST_AFTER_ROTATION': True,
-    # 'UPDATE_LAST_LOGIN': True,
+    'ALGORITHM': 'HS256',
+
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    # 'SIGNING_KEY': SECRET_KEY,
+    # 'VERIFYING_KEY': None,
+    # 'AUDIENCE': None,
+    # 'ISSUER': None,
+    # 'USER_ID_FIELD': 'id',
+    # 'USER_ID_CLAIM': 'user_id',
 }
 
 
 AUTH_USER_MODEL = 'profile.User'
+
+# Custom the User creation fields
+# Custom the User response details
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'core.serializers.UserCreateSerializer',  
+        'current_user': 'core.serializers.UserCreateSerializer', 
+    },
+}

@@ -1,7 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.db.models.base import Model
 from django.urls import reverse
-from blog.models import Post
+from blog.models import Posts
 from blog.models import Comment
 
 
@@ -21,7 +21,7 @@ class PostSitemap(Sitemap):
     priority = 0.9
 
     def items(self):
-        return Post.objects.all()
+        return Posts.objects.all()
     
     def lastmod(self, obj):
         return obj.publish 

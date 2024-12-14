@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth import authenticate
 from django import forms
-from .models import CustomUser
+from .models import User
 from blog.models import Comment
 
 
@@ -13,7 +13,7 @@ class CustomUserCreationsForm(UserCreationForm):
     # first_name = forms.CharField(max_length=100)
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ['email']
 
     def clean_password2(self):
@@ -38,8 +38,8 @@ class CustomeUserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = CustomUser
-        fields = ["email", "password", "first_name", "last_name", 'profile_image', "is_active"]
+        model = User
+        fields = ["email", "password", "first_name", "last_name", 'profile_picture']
 
 
 
@@ -49,7 +49,7 @@ class AccountAuthenticationForm(forms.ModelForm):
     password = forms.CharField(label="Password", widget=forms.PasswordInput) # to hide the password when typing
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ("email", "password")
 
     # forms doesnt know if this is a register or login so this clean will show the errors that come along

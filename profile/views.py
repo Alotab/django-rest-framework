@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from .models import CustomUser
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model  # get the custome user model 
 from .forms import CustomeUserChangeForm, CustomUserCreationsForm, AccountAuthenticationForm

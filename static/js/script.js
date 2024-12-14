@@ -421,6 +421,8 @@ function permalinkShare(){
 }
 permalinkShare();
 
+
+
 /*========================= DARK MODE =======================   activate-mode */
 const setDarkEl = document.querySelector('.darkmode-setup');
 const setSunsetEl = document.querySelector('.sunset-setup');
