@@ -5,26 +5,30 @@ from django.urls import reverse
 # from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.contrib import messages
-# from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-# from django.views.generic import UpdateView
-from .models import Comment, Posts
-from django.views.decorators.csrf import csrf_exempt
-# from users.models import CustomUser
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+from rest_framework import permissions
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.list import ListView
+from .models import Comment, Posts
 from taggit.models import Tag
 from .forms import PostForm
 from .utilss import get_real_time_date_format
-from rest_framework.viewsets import ModelViewSet
-from django.views.generic.list import ListView
 from .serializers import PostsSerializer, PostCreateSerializer
 
 
 
 ## REACT URLS VIEWS
+
+# custom permission class to check if the current user is the owner of the post
+class IsOwner(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.author == request.user
+    
 class PostViewSet(ModelViewSet):
-    queryset = Posts.objects.all()
-    # serializer_class = PostsSerializer
+    queryset = Posts.objects.all().order_by('-publish')
 
 
     def get_serializer_class(self):
@@ -39,7 +43,7 @@ class PostViewSet(ModelViewSet):
     def get_queryset(self):  
 
         # Customize queryset if needed
-        return Posts.objects.filter(status="Published")
+        return Posts.objects.all().order_by('-publish')
     
     def get_object(self):
         # Customize object retrieval logic if needed
@@ -61,35 +65,17 @@ class PostViewSet(ModelViewSet):
         post.save()
 
 
+class PostDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Posts.objects.all()
+    serializer_class = PostsSerializer
 
-
-@api_view(['POST'])
-def create_posts(request):
-    if request.method == 'POST':
-        serializer = PostsSerializer(data=request.data)
-        if serializer.is_valid():
-            # You can save the data to the database if necessary
-            # For example, saving it to a model
-            posts = Posts.objects.create(
-                title=serializer.validated_data['title'],
-                snippet=serializer.validated_data['snippet'],
-                tags=serializer.validated_data['tags'],
-                content=serializer.validated_data['content'],
-                image=serializer.validated_data.get('image'),
-                status=serializer.validated_data['status'],
-            )
-            return Response({'status': 'Post created successfully', 'posts': serializer.data})
-        return Response(serializer.errors, status=400)
-
-
-# class PostsView(ListView):
-#   model = Posts
-#   paginate_by = 3
-#   context_object_name = 'posts'
-#   template_name = 'blog/home.html'
-#   ordering = ['publish']
-  
-
+    # determine the permissions that should be applied to the current request
+    def get_permission(self):
+        if self.action == 'retrieve':
+            permission_classes = []
+        else:
+            permission_classes = [permissions.IsAuthenticated, permissions.IsOwner]
+        return [permission() for permission in permission_classes]
 
 
 
@@ -129,27 +115,6 @@ def post_blog(request):
         form = PostForm()
     return render(request, 'blog/createPost.html', {'form': form})
 
-
-
-### Works fine just want to update a new one to recieve data from React
-# def post_blog(request):
-#   if request.method == 'POST':
-#     form = PostForm(request.POST, request.FILES)
-#     if form.is_valid():
-#       post = form.save(commit=False)
-#       post.author = request.user
-#       # context['meta'] = post.as_meta()
-#       post.save()
-#       messages.success(request, 'Post created successfully')
-#       return redirect('blog:home')
-      
-#   else:
-#     form = PostForm()
-#   return render(request, 'blog/createPost.html', {'form': form})
-
-
-
-
 def post_list(request):
     """ List the all the post in the home page """
     posts = Posts.objects.all()
@@ -166,7 +131,6 @@ def post_list(request):
     }
 
     return render(request, 'blog/home.html', context)
-
 
 
 def post_detail(request, slug, pk):
@@ -209,6 +173,81 @@ def post_detail(request, slug, pk):
     return render(request, 'blog/post_detail.html', context)
 
 
+def post_update(request, slug, pk):
+    # post = Post.objects.get(id=pk)
+    post = get_object_or_404(Posts, slug=slug, id=pk)
+    form = PostForm(instance=post)
+    if request.method == 'POST':
+      form = PostForm(request.POST, instance=post)
+      if form.is_valid():
+        form.save()
+        return redirect('blog:home')
+    
+    return render(request, 'blog/createPost.html', {'post': post, 'form': form})
+
+@api_view(['POST'])
+def create_posts(request):
+    if request.method == 'POST':
+        serializer = PostsSerializer(data=request.data)
+        if serializer.is_valid():
+            # You can save the data to the database if necessary
+            # For example, saving it to a model
+            posts = Posts.objects.create(
+                title=serializer.validated_data['title'],
+                snippet=serializer.validated_data['snippet'],
+                tags=serializer.validated_data['tags'],
+                content=serializer.validated_data['content'],
+                image=serializer.validated_data.get('image'),
+                status=serializer.validated_data['status'],
+            )
+            return Response({'status': 'Post created successfully', 'posts': serializer.data})
+        return Response(serializer.errors, status=400)
+
+
+@csrf_exempt
+def post_delete(request, slug,  pk):
+    post = get_object_or_404(Posts, slug=slug, id=pk)
+    post.delete()
+    return redirect('blog:home')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Works fine just want to update a new one to recieve data from React
+# def post_blog(request):
+#   if request.method == 'POST':
+#     form = PostForm(request.POST, request.FILES)
+#     if form.is_valid():
+#       post = form.save(commit=False)
+#       post.author = request.user
+#       # context['meta'] = post.as_meta()
+#       post.save()
+#       messages.success(request, 'Post created successfully')
+#       return redirect('blog:home')
+      
+#   else:
+#     form = PostForm()
+#   return render(request, 'blog/createPost.html', {'form': form})
+
+
 
 # class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 #   model = Post
@@ -224,22 +263,3 @@ def post_detail(request, slug, pk):
 #       return True
 #     return False
 
-
-def post_update(request, slug, pk):
-    # post = Post.objects.get(id=pk)
-    post = get_object_or_404(Post, slug=slug, id=pk)
-    form = PostForm(instance=post)
-    if request.method == 'POST':
-      form = PostForm(request.POST, instance=post)
-      if form.is_valid():
-        form.save()
-        return redirect('blog:home')
-    
-    return render(request, 'blog/createPost.html', {'post': post, 'form': form})
-
-
-
-def post_delete(request, slug,  pk):
-    post = get_object_or_404(Post, slug=slug, id=pk)
-    post.delete()
-    return redirect('blog:home')

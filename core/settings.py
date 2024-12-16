@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-x79ehswn*1@ii50m5xvdib)yjz-fx&6&^+0)81@!l5=(4rsw$7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# for author profile image url setup
+BASE_URL = 'http://127.0.0.1:8000'
+
 ALLOWED_HOSTS = []
 
 
@@ -253,6 +256,28 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
+########################## Update HERE #############################
+
+
+# CSRF_COOKIE_HTTPONLY = False  # Ensure CSRF cookie is accessible to JavaScript
+
+# CSRF_COOKIE_NAME = 'csrftoken'  # Make sure the cookie name is consistent
+# CSRF_COOKIE_NAME = 'X-CSRFToken'
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',  # React app URL
+    'http://127.0.0.1:5173',  # If you're using HTTPS locally
+]
+
+CSRF_COOKIE_DOMAIN = [
+    "https://localhost:5173",
+    # Add other cookie domain here if needed
+]
+
+# CSRF_COOKIE_SAMESITE = 'None'  # Allow cross-site cookies
+CSRF_COOKIE_SECURE = False     # Set to True for HTTPS sites
+####################################3
+
 CORS_ALLOWED_HEADERS = [
     'Authorization',
     'Content-Type',
@@ -271,19 +296,10 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT','Bearer',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1500),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
-    # 'ROTATE_REFRESH_TOKENS': False,
-    # 'BLACKLIST_AFTER_ROTATION': True,
     'ALGORITHM': 'HS256',
-
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
-    # 'SIGNING_KEY': SECRET_KEY,
-    # 'VERIFYING_KEY': None,
-    # 'AUDIENCE': None,
-    # 'ISSUER': None,
-    # 'USER_ID_FIELD': 'id',
-    # 'USER_ID_CLAIM': 'user_id',
 }
 
 
@@ -294,6 +310,6 @@ AUTH_USER_MODEL = 'profile.User'
 DJOSER = {
     'SERIALIZERS': {
         'user_create': 'core.serializers.UserCreateSerializer',  
-        'current_user': 'core.serializers.UserCreateSerializer', 
+        'current_user': 'core.serializers.CustomUserSerializer',  # CustomUserSerializer 'core.serializers.UserCreateSerializer',
     },
 }

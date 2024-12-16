@@ -22,6 +22,7 @@ class Posts(models.Model):
     tags = models.CharField(max_length=200, null=True, blank=True)
     slug =  models.SlugField(max_length=250, unique_for_date='publish', unique=True, blank=True)
     publish = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
     # author = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='post')
 
@@ -32,8 +33,6 @@ class Posts(models.Model):
     def readtime(self):
         return readtime.of_text(self.content).text
     
-
-    
     def get_readtime(self):
         result = readtime.of_text(self.content)
         minutes = result.minutes
@@ -43,18 +42,45 @@ class Posts(models.Model):
             hours = minutes // 60
             return f"{hours} hour{'s' if hours > 1 else ''}"
         
-    
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.slug, 'pk': self.id}) # args= [self.slug, self.id]
 
-
-    def create_slug(sender, instance, **kwargs):
+    def create_slug(self, sender, instance, **kwargs):
         if not instance.slug:
             instance.slug = slugify(instance.title)
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Posts, self).save(*args, **kwargs)
+
+
+class Comment(models.Model):
+    blog = models.ForeignKey(Posts, on_delete=models.CASCADE, related_name='comment')
+    # user_comment = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user')
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f'{self.user_comment} {self.blog}'
+
+
+class CommentLike(models.Model):
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment_likes')
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # ensure that no two CommentLike objects have the same user and comment values.
+    # class Meta:
+    #     unique_together = (('user', 'comment'),)
+
+
+
+
+
+
+
+
+
 
 
 # This manager filter the post objects to retreived on published post
@@ -112,23 +138,3 @@ class Posts(models.Model):
 #         # self.resize_image()
 #         super(Post, self).save(*args, **kwargs)
     
-
-class Comment(models.Model):
-    blog = models.ForeignKey(Posts, on_delete=models.CASCADE, related_name='comment')
-    # user_comment = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user')
-    comment = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self) -> str:
-        return f'{self.user_comment} {self.blog}'
-
-
-
-class CommentLike(models.Model):
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comment_likes')
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='likes')
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    # ensure that no two CommentLike objects have the same user and comment values.
-    # class Meta:
-    #     unique_together = (('user', 'comment'),)

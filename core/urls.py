@@ -7,6 +7,7 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from django.contrib.sitemaps.views import sitemap
 from profile import views as user_views
+from rest_framework import routers
 # from haystack.views import SearchView
 from core.sitemaps import (
     HomeSitemap,
@@ -14,6 +15,8 @@ from core.sitemaps import (
     PortfolioSitemap,
     CommentSitemap,
 )
+
+
 
 sitemaps = {
     "posts": PostSitemap,

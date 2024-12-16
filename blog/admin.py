@@ -8,15 +8,6 @@ class PostsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
 
 
-# @admin.register(Post)
-# class PostAdmin(admin.ModelAdmin):
-#     list_display = ['title', 'status']
-#     search_fields = ['title']
-#     prepopulated_fields = {'slug': ('title', )}
-
-
-#admin.site.register(Comment)
-
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     # list_display = ['user_comment', 'comment', 'blog']

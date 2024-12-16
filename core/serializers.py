@@ -7,3 +7,8 @@ from rest_framework import serializers
 class UserCreateSerializer(BaseUserCreateSerializer):
     class Meta(BaseUserCreateSerializer.Meta): # this inherits everything in the BaseUserCreateSerializer' Meta class
         fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name', 'profile_picture']
+
+
+class CustomUserSerializer(BaseUserCreateSerializer):
+    class Meta(BaseUserCreateSerializer.Meta): # this inherits everything in the BaseUserCreateSerializer' Meta class
+        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name', 'profile_picture', 'is_staff', 'is_superuser', 'is_active']

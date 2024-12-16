@@ -29,10 +29,13 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
+
+
 # from allauth.account.views import SignupView, LoginView
 from rest_framework import status, generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import permissions, viewsets
 from .serializers import UserSerializer
 
 
