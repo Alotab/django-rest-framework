@@ -14,7 +14,7 @@
                         <img src="{{ post.author.profile_image.url }}" alt="{{ post.title }}">
                         <div class="author-name">
                             <p class="author-name-link">{{ post.author }}</p>
-                            <p id="time-tag" class="publish">Posted on {{ post.publish |date:'M d'}} &middot; {{ post.get_readtime }} read</p>
+                            <p id="time-tag" class="publish">Posted on {{ post.publish |date:'M d'}} &middot; {{ post.get_readtime }} <span>read</span></p>
                         </div>
                         {% if request.user.is_authenticated %}
                         <div class="post-edit">
