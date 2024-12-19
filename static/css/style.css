@@ -2652,43 +2652,11 @@
       font-size: 15px;
       margin-right: 5px;
     }
-    .mobile-nav-toggle{
-      display: block;
-      position: absolute;
-      z-index: 9999;
-      background-color: transparent;
-      background-repeat: no-repeat;
-      width: 4rem;
-      border: 0;
-      aspect-ratio: 1; /* controls the height and width of an object*/
-      top: 0.7rem;
-      right: 1.5rem;
-    }
-    .mobile-nav-toggle:hover{
-      border-radius: 0.5rem;
-      background-color: var(--button-hoverWhite);
-    }
-    .sr-only i{
-      color: #fff;
-      font-size: 1.8rem;
-    }
-    .mobile-nav-toggle-close{
-      display: block;
-      position: absolute;
-      z-index: 9999999;
-      background-color: transparent;
-      background-repeat: no-repeat;
-      width: 4rem;
-      border: 0;
-      aspect-ratio: 1; /* controls the height and width of an object*/
-      top: 0.7rem;
-      right: 1.5rem;
-      display: none;
-    }
-    .mobile-nav-toggle-close:hover{
-      border-radius: 0.5rem;
-      background-color: var(--button-hoverWhite);
-    }
+   /* ========HAMBURGER =========*/
+   
+
+   
+  
     .darkmode-nav{
       margin-right: 5.5rem;
     }

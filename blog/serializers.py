@@ -26,11 +26,8 @@ class PostsSerializer(serializers.ModelSerializer):
     def get_read_time(self, obj):
         return obj.get_readtime()
     
-        
-    
     def get_author_info(self, obj):
         author = obj.author
-
         # Construct the full URL for the profile picture
         profile_picture_url = author.profile_picture.url if author.profile_picture else None
 

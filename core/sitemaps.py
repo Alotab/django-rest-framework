@@ -2,7 +2,7 @@ from django.contrib.sitemaps import Sitemap
 from django.db.models.base import Model
 from django.urls import reverse
 from blog.models import Posts
-from blog.models import Comment
+# from blog.models import Comment
 
 
 class HomeSitemap(Sitemap):
@@ -39,15 +39,15 @@ class PortfolioSitemap(Sitemap):
         return reverse(item)
 
 
-class CommentSitemap(Sitemap):
-    changefreq = "monthly"
-    priority = 0.9
+# class CommentSitemap(Sitemap):
+#     changefreq = "monthly"
+#     priority = 0.9
 
-    def items(self):
-        return Comment.objects.all()
+#     def items(self):
+#         return Comment.objects.all()
     
-    def lastmod(self, obj):
-        return obj.created_at
+#     def lastmod(self, obj):
+#         return obj.created_at
 
 
 

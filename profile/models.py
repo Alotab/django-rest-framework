@@ -34,14 +34,10 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     email = models.EmailField(unique=True, blank=True)
-    # profile_picture = models.ImageField(upload_to=get_profile_image_filepath, null=True, default=get_default_profile_image)
     profile_picture = models.ImageField(upload_to="images/", null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
-
-    # def get_profile_image_filename(self):
-    #     return str(self.profile_picture)[str(self.profile_picture).index(f"profile_images/{self.pk}/"):]
 
 
 

@@ -13,7 +13,7 @@ from core.sitemaps import (
     HomeSitemap,
     PostSitemap,
     PortfolioSitemap,
-    CommentSitemap,
+    # CommentSitemap,
 )
 
 
@@ -22,7 +22,7 @@ sitemaps = {
     "posts": PostSitemap,
     "home": HomeSitemap,
     "portfolio": PortfolioSitemap,
-    "comment": CommentSitemap,
+    # "comment": CommentSitemap,
 }
 
 

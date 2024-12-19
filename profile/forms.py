@@ -3,7 +3,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth import authenticate
 from django import forms
 from .models import User
-from blog.models import Comment
+# from blog.models import Comment
 
 
 class CustomUserCreationsForm(UserCreationForm):
@@ -62,8 +62,8 @@ class AccountAuthenticationForm(forms.ModelForm):
             
 
 
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = ['comment']
+# class CommentForm(forms.ModelForm):
+#     class Meta:
+#         model = Comment
+#         fields = ['comment']
 

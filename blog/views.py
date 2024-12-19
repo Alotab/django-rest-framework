@@ -12,7 +12,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import permissions
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.list import ListView
-from .models import Comment, Posts
+from .models import Posts
 from taggit.models import Tag
 from .forms import PostForm
 from .utilss import get_real_time_date_format
@@ -126,16 +126,14 @@ def post_list(request):
 
     context = {
     'posts': posts,
-    # 'trending_post': trending_post,
     'tags': tags,
     }
-
     return render(request, 'blog/home.html', context)
 
 
 def post_detail(request, slug, pk):
     post = get_object_or_404(Posts, slug=slug, id=pk)
-    comments = Comment.objects.filter(blog=post)
+    # comments = Comment.objects.filter(blog=post)
     # post_tags = post.tags.all()
     # trending_posts = Posts.published.all().order_by('-publish')[:4]
     # post_tags_id = post.tags.values_list('id', flat=True)
@@ -150,24 +148,17 @@ def post_detail(request, slug, pk):
 
     if request.method == 'POST':
 
-      comment = Comment(
-        user_comment=request.user,
-        comment=request.POST['comment'],
-        blog=post,
-      )
-      comment.save()
+    #   comment = Comment(
+    #     user_comment=request.user,
+    #     comment=request.POST['comment'],
+    #     blog=post,
+    #   )
+    #   comment.save()
 
       # return redirect('/')
       return HttpResponseRedirect(request.META['HTTP_REFERER'])
-  
-  
-
     context = {
     'post': post,
-    'comments': comments,
-    # 'post_tags': post_tags,
-    # 'related_posts': related_posts,
-    # 'trending_posts': trending_posts,
     'post_image': post_image,
     }
     return render(request, 'blog/post_detail.html', context)
